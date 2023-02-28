@@ -35,7 +35,10 @@ struct RootView: View {
                 destination: SecondContentView(),
                 isActive: self.$isActive
             ) {
-                Text("Push Second")
+                HStack {
+                    Text("Push Second")
+                    Image(systemName: "chevron.right")
+                }
             }.navigationBarTitle("Root")
         }
         .environment(\.rootPresentationMode, self.$isActive)
@@ -47,15 +50,22 @@ struct SecondContentView: View {
     @Environment(\.presentationMode) private var presentationMode
     var body: some View {
         VStack(spacing: 32) {
-            Text("Second")
             NavigationLink(
                 destination: ThirdContentView(),
                 isActive: self.$isActive
             ) {
-                Text("Push Third")
+                HStack {
+                    Text("Push Third")
+                    Image(systemName: "chevron.right.2")
+                }
             }
             Button (action: { self.presentationMode.wrappedValue.dismiss() } )
-            { Text("Pop") }
+            {
+                HStack {
+                    Image(systemName: "chevron.left")
+                    Text("Pop")
+                }
+            }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitle("Second")
@@ -66,9 +76,13 @@ struct ThirdContentView: View {
     @Environment(\.rootPresentationMode) private var rootPresentationMode
     var body: some View {
         VStack(spacing: 32) {
-            Text("Third")
             Button (action: { self.rootPresentationMode.wrappedValue.dismiss() } )
-            { Text("Pop to Root") }
+            {
+                HStack {
+                    Image(systemName: "chevron.left.2")
+                    Text("Pop to Root")
+                }
+            }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitle("Third")
@@ -98,7 +112,10 @@ struct AnotherRootView: View {
                     SecondContentView()
                 }
             ){
-                Text("Push Second")
+                HStack {
+                    Text("Push Second")
+                    Image(systemName: "chevron.right")
+                }
             }
             .navigationBarTitle("Another Root")
         }
