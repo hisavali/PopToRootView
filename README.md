@@ -4,7 +4,7 @@ Repo is trying to replicate issue described here at [StackOverflow](https://stac
 
 - `RootView` is pushing new view using `NavigationLink(destination:isActive:)`
 - `RootView` is injecting `.environment(\.rootPresentationMode)` for child views to access!
--  When leaf view `ThirdContentView` taps `Pop to Root`, it works as expected ✅ 
+-  When leaf view `ThirdContentView` taps `Pop to Root`, call to `rootPresentationMode.dismiss()` works as expected ✅ 
 
 | Working Demo |
 | ------------ |
@@ -14,7 +14,7 @@ Repo is trying to replicate issue described here at [StackOverflow](https://stac
 
 - `AnotherRootView` is pushing new view using `NavigationLink(unwrapping:case:onNavigate:destination:)` of [SwiftUINavigation](https://github.com/pointfreeco/swiftui-navigation)
 - `AnotherRootView` is injecting `.environment(\.rootPresentationMode)` for child views to access!
--  When leaf view `ThirdContentView` taps `Pop to Root`, it doesn't work as expected ❌
+-  When leaf view `ThirdContentView` taps `Pop to Root`, call to `rootPresentationMode.dismiss()` doesn't work as expected ❌
 - Root cause: `onNavigate` closure is not called to flip the binding. Closure is defined `NavigationLink(unwrapping:case:onNavigate:destination:)`
 
 | Not Working Demo |
